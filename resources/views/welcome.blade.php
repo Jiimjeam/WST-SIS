@@ -40,6 +40,7 @@
 <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
         <a href="index.html" class="logo d-flex align-items-center">
+            <img src="assets1/img/buksu-logo.png" alt="Logo" class="logo-img">
             <h1 class="sitename">SIS-WST</h1>
         </a>
         <nav id="navmenu" class="navmenu d-flex align-items-center">
