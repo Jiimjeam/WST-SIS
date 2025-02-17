@@ -9,15 +9,15 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
+    return view('studentPages.dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/tables', function () {
-    return view('tables');
+    return view('studentPages.tables');
 })->middleware(['auth', 'verified'])->name('tables');
 
 Route::get('/profiles', function () {
-    return view('profiles');
+    return view('studentPages.profiles');
 })->middleware(['auth', 'verified'])->name('profiles');
 
 

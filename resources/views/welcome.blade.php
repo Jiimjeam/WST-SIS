@@ -92,28 +92,28 @@
             <div class="col-xl-3 col-md-6">
               <div class="icon-box">
                 <div class="icon"><i class="bi bi-easel"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Lorem Ipsum</a></h4>
+                <h4 class="title"><a href="" class="stretched-link">Authentication</a></h4>
               </div>
             </div><!--End Icon Box -->
 
             <div class="col-xl-3 col-md-6">
               <div class="icon-box">
                 <div class="icon"><i class="bi bi-gem"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Sed ut perspiciatis</a></h4>
+                <h4 class="title"><a href="" class="stretched-link">Authorization</a></h4>
               </div>
             </div><!--End Icon Box -->
 
             <div class="col-xl-3 col-md-6">
               <div class="icon-box">
                 <div class="icon"><i class="bi bi-geo-alt"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Magni Dolores</a></h4>
+                <h4 class="title"><a href="" class="stretched-link">CRUDES</a></h4>
               </div>
             </div><!--End Icon Box -->
 
             <div class="col-xl-3 col-md-6">
               <div class="icon-box">
                 <div class="icon"><i class="bi bi-command"></i></div>
-                <h4 class="title"><a href="" class="stretched-link">Nemo Enim</a></h4>
+                <h4 class="title"><a href="" class="stretched-link">Grades & Enrollment</a></h4>
               </div>
             </div><!--End Icon Box -->
 
@@ -131,16 +131,16 @@
         <div class="row gy-4">
 
           <div class="col-lg-6 content" data-aos="fade-up" data-aos-delay="100">
-            <p class="who-we-are">Who We Are</p>
-            <h3>Unleashing Potential with Creative Strategy</h3>
+            <p class="who-we-are">Bukidnon State University</p>
+            <h3>Student Management System</h3>
             <p class="fst-italic">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-              magna aliqua.
+            The BukSU Student Information System (SIS) is a Laravel-based platform for managing student enrollment, 
+            subjects, and grades with secure authentication and role-based access.
             </p>
             <ul>
-              <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Duis aute irure dolor in reprehenderit in voluptate velit.</span></li>
-              <li><i class="bi bi-check-circle"></i> <span>Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate trideta storacalaperda mastiro dolore eu fugiat nulla pariatur.</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Student & Admin roles</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>CRUDES</span></li>
+              <li><i class="bi bi-check-circle"></i> <span>Enrollemnt And Grades Viewing</span></li>
             </ul>
             <a href="#" class="read-more"><span>Read More</span><i class="bi bi-arrow-right"></i></a>
           </div>
@@ -148,15 +148,15 @@
           <div class="col-lg-6 about-images" data-aos="fade-up" data-aos-delay="200">
             <div class="row gy-4">
               <div class="col-lg-6">
-                <img src="assets1/img/about-company-1.jpg" class="img-fluid" alt="">
+                <img src="assets1/img/buksu-csdt.jpg" class="img-fluid" alt="">
               </div>
               <div class="col-lg-6">
                 <div class="row gy-4">
                   <div class="col-lg-12">
-                    <img src="assets1/img/about-company-2.jpg" class="img-fluid" alt="">
+                    <img src="assets1/img/buksu-grasses.jpg" class="img-fluid" alt="">
                   </div>
                   <div class="col-lg-12">
-                    <img src="assets1/img/about-company-3.jpg" class="img-fluid" alt="">
+                    <img src="assets1/img/buksu-entrance.jpg" class="img-fluid" alt="">
                   </div>
                 </div>
               </div>

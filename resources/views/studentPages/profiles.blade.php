@@ -1,4 +1,4 @@
-@extends('layouts.dashboardlayout')  
+@extends('layouts.studentLayout.dashboardlayout')  
 
 @section('title', 'Dashboard')  
 
