@@ -1,10 +1,10 @@
 @extends('layouts.dashboardlayout')  <!-- Extends a layout file -->
 
-@section('title', ' Student Dashboard')  <!-- Defining a section with a single line -->
+@section('title', 'Dashboard')  <!-- Defining a section with a single line -->
 
 @section('dashboard')  <!-- Defining a multi-line section -->
                 <!-- End Navbar -->
-    <div class="container-fluid py-4">
+    <!-- <div class="container-fluid py-4">
       <div class="row">
         <div class="col-lg-6 col-12">
           <div class="row">
@@ -752,7 +752,9 @@
           </div>
         </div>
       </footer>
-    </div>
+    </div> -->
+
+    <h1>Admin Dashboard</h1>
 @endsection
 
  

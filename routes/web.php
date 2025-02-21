@@ -1,16 +1,24 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\studentController\studentdashboard;
+use App\Http\Controllers\admintController\admindashboard;
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 
-Route::get('/dashboard', function () {
-    return view('studentPages.dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/student/dashboard', [studentdashboard::class, 'indexStudent'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard');
+
+Route::get('/admin/dashboard', [admindashboard::class, 'indexAdmin'])
+    ->middleware(['isAdmin', 'auth', 'verified'])
+    ->name('AdminDashboard');
+
+
+
 
 Route::get('/tables', function () {
     return view('studentPages.tables');
