@@ -4,7 +4,7 @@
 
 @section('Admindashboard')  <!-- Defining a multi-line section -->
                 <!-- End Navbar -->
-    <!-- <div class="container-fluid py-4">
+    <div class="container-fluid py-4">
       <div class="row">
         <div class="col-lg-6 col-12">
           <div class="row">
@@ -752,9 +752,9 @@
           </div>
         </div>
       </footer>
-    </div> -->
+    </div>
 
-    <h1>Admin Dashboard</h1>
+    <!-- <h1>Admin Dashboard</h1> -->
 @endsection
 
  

@@ -2,8 +2,10 @@
 
 
 use App\Http\Controllers\adminController\admindashboard;
-use App\Http\Controllers\adminController\admintables;
+use App\Http\Controllers\adminController\adminstudentTables;
 use App\Http\Controllers\adminController\adminprofiles;
+use App\Http\Controllers\adminController\adminsubjects;
+use App\Http\Controllers\adminController\adminenrolled;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\studentController\studentdashboard;
 use Illuminate\Support\Facades\Route;
@@ -30,18 +32,30 @@ Route::get('/student/dashboard', [studentdashboard::class, 'indexStudent'])
 
 
 
-//Admin Routes
+//Admin Pages Routes
 Route::get('/admin/dashboard', [admindashboard::class, 'indexAdmin'])
     ->middleware(['auth', 'verified'])
-    ->name('admin.dashboard');
+    ->name('Admin Dashboard');
 
-    Route::get('admin/tables', [admintables::class, 'Atables'])
+    Route::get('admin/students', [adminstudentTables::class, 'AstudentTables'])
     ->middleware(['auth', 'verified'])
-    ->name('admin-tables');
+    ->name('Admin Student Tables');
 
     Route::get('admin/profiles', [adminprofiles::class, 'Aprofiles'])
     ->middleware(['auth', 'verified'])
-    ->name('admin-profiles');
+    ->name('Admin Profile');
+
+    Route::get('admin/subjects', [adminsubjects::class, 'Asubjects'])
+    ->middleware(['auth', 'verified'])
+    ->name('Admin Subjects');
+
+    Route::get('admin/enrolled', [adminenrolled::class, 'Aenrolled'])
+    ->middleware(['auth', 'verified'])
+    ->name('Admin Enrolled Students');
+
+    Route::get('admin/addGrades', [adminaddgrades::class, 'Aaddgrades'])
+    ->middleware(['auth', 'verified'])
+    ->name('Admin Add Grades');
 
 
 
