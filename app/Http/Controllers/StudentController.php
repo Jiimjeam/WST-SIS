@@ -1,8 +1,8 @@
 <?php
 
+
 namespace App\Http\Controllers;
 use App\Models\Student;
-
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -10,7 +10,7 @@ class StudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function getAllStudents()
     {
         $studentList = Student::all();
         return view ('adminPages.adminStudentTables', 
@@ -18,6 +18,31 @@ class StudentController extends Controller
                 'studentList' => $studentList
             ]
         );
+    } 
+
+    public function adminDashboard()
+    {
+        return view ('adminPages.Adashboard');
+    } 
+
+    public function adminProfile()
+    {
+        return view ('adminPages.adminProfiles');
+    } 
+
+    public function adminSubjects()
+    {
+        return view ('adminPages.adminSubjects');
+    } 
+
+    public function adminEnrolledStudents()
+    {
+        return view ('adminPages.adminEnrolled');
+    } 
+
+    public function adminAddgrades()
+    {
+        return view ('adminPages.adminaddgrades');
     } 
 
     /**
