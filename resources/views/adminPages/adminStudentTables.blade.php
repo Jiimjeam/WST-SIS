@@ -10,6 +10,7 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
@@ -87,9 +88,28 @@
                         <span class="text-secondary text-xs font-weight-bold">{{ $student->address }}</span>
                       </td>
                       <td class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">
-                        <a href="javascript:;" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit user">
-                          Edit
-                        </a>
+
+                          <a href="{{ route('student.show', $student->id ) }}">
+                            <button class="btn btn-md btn-info view-btn">
+                              <i class="fas fa-eye"></i>
+                            </button>
+                          </a>
+
+                          <button class="btn btn-md btn-primary" data-toggle="tooltip" data-original-title="Edit user">
+                              <i class="fas fa-edit"></i>
+                          </button>
+
+                          <a href="#" onclick="deleteStudent({{$student->id}})">
+                            <button class="btn btn-md btn-danger" data-toggle="tooltip" data-original-title="Archive user">
+                                <i class="fas fa-archive"></i>
+                            </button>
+                          </a>
+
+                          <form method="POST" action="{{route('student.destroy', $student->id)}}" id="student-form-{{ $student->id }}">
+                            @csrf
+                            @method('DELETE')
+                          </form>
+
                       </td>
                     </tr>
                     @endforeach
@@ -101,6 +121,14 @@
         </div>
       </div>
     </div>
+
+    <script>
+      function deleteStudent(id){
+        form = document.getElementById("student-form-" + id);
+        form.submit();
+      } 
+    </script>
+
 @endsection
 
 

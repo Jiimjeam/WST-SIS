@@ -64,9 +64,13 @@ class StudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Student $student)
     {
-        //
+        return view ('adminPages.modals.viewStudent', 
+            [
+                "student" => $student,
+            ]
+        );
     }
 
     /**
@@ -88,8 +92,14 @@ class StudentController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Student $student)
     {
-        //
+        $student->delete(); 
+        $studentList = Student::all();
+        return view ("adminPages.adminStudentTables", [
+            "ConfirmMessage" => "Student Deleted Successfully", 
+            "alertType" => "success", 
+            "studentList" => $studentList
+        ]);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Models\Student;
 
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\admindashboard;
@@ -41,7 +41,10 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/profiles', [StudentController::class, 'adminProfile'])->name('Admin Profile');
     Route::get('/enrolled', [StudentController::class, 'adminEnrolledStudents'])->name('Admin Enrolled Students');
     Route::get('/addGrades', [StudentController::class, 'adminAddgrades'])->name('Admin Add Grades');
-});
+
+    Route::get('student/{student}', [StudentController::class, 'show'])->name('student.show');
+    Route::delete('student/{student}', [StudentController::class, 'destroy'])->name('student.destroy');
+}); 
 
 
 
