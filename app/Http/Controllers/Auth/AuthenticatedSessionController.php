@@ -52,7 +52,7 @@ class AuthenticatedSessionController extends Controller
     public function authenticated(Request $request, $user)
     {
         if ($user->isAdmin()) {
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('Admin Dashboard');
         }
         return redirect()->route('dashboard');
     }

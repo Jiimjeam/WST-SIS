@@ -14,11 +14,10 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
-
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
 
-//Student Routes
+//Student Pages Routes
 Route::get('/student/dashboard', [studentdashboard::class, 'indexStudent'])
     ->middleware(['auth' ,'verified'])
     ->name('dashboard');
@@ -30,7 +29,6 @@ Route::get('/student/dashboard', [studentdashboard::class, 'indexStudent'])
     Route::get('/profiles', function () {
         return view('studentPages.profiles');
     })->middleware(['auth', 'verified'])->name('profiles');    
-
 
 
 //Admin Pages Routes
