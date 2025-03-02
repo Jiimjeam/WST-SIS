@@ -17,8 +17,8 @@
                 <h5 class="mb-1 text-white font-weight-bolder">
                   {{Auth::user()->name}}
                 </h5>
-                <p class="mb-0 text-white text-sm">
-                  CEO / Co-Founder
+                <p class="mb-0 text-white text-md">
+                {{Auth::user()->role}}
                 </p>
               </div>
             </div>

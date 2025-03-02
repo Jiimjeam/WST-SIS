@@ -45,7 +45,7 @@
           <span class="ms-1 font-weight-bold">{{ Auth::user()->name }}</span>
           <br>
            <!-- <span class="ms-1 text-muted">{{ Auth::user()->role }}</span> -->
-           <span class="ms-1 text-muted">Student</span>
+           <span class="ms-1 text-muted">Admin</span>
         </a>
     </div>
 
@@ -69,7 +69,7 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">Dashboard</span>
+            <span class="nav-link-text ms-1">DashboardAdmin</span>
           </a>
         </li>
         <li class="nav-item {{ request()->routeIs('tables') ? 'active' : '' }}">
@@ -336,7 +336,7 @@
       </div>
     </nav>
    
-    @yield('dashboard')
+    @yield('Admindashboard')
 
 
   </main>

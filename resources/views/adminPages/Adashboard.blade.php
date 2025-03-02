@@ -1,8 +1,8 @@
 @extends('layouts.dashboardlayout')  <!-- Extends a layout file -->
 
-@section('title', 'Dashboard')  <!-- Defining a section with a single line -->
+@section('title', 'Admindashboard')  <!-- Defining a section with a single line -->
 
-@section('dashboard')  <!-- Defining a multi-line section -->
+@section('Admindashboard')  <!-- Defining a multi-line section -->
                 <!-- End Navbar -->
     <!-- <div class="container-fluid py-4">
       <div class="row">

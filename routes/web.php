@@ -1,22 +1,26 @@
 <?php
 
+
+use App\Http\Controllers\adminController\admindashboard;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\studentController\studentdashboard;
-use App\Http\Controllers\admintController\admindashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Auth\AuthenticatedSessionController;
+
+
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
-
 Route::get('/student/dashboard', [studentdashboard::class, 'indexStudent'])
-    ->middleware(['auth', 'verified'])
+    ->middleware(['auth' ,'verified'])
     ->name('dashboard');
 
 Route::get('/admin/dashboard', [admindashboard::class, 'indexAdmin'])
-    ->middleware(['isAdmin', 'auth', 'verified'])
-    ->name('AdminDashboard');
+    ->middleware(['auth', 'verified'])
+    ->name('admin.dashboard');
 
+    
 
 
 

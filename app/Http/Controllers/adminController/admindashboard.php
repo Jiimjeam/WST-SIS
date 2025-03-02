@@ -8,6 +8,6 @@ use Illuminate\Http\Request;
 class admindashboard extends Controller
 {
     public function indexAdmin() { 
-        return view('adminPages.Adashbaord');
+        return view('layouts.Adminlayout');
     }
 }
