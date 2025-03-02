@@ -52,8 +52,8 @@
     <hr class="horizontal dark mt-0">
     <div class="collapse navbar-collapse  w-auto " id="sidenav-collapse-main">
       <ul class="navbar-nav">
-        <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-          <a class="nav-link  {{ request()->routeIs('dashboard') ? 'active' : '' }}" href="{{ route('dashboard') }}">
+        <li class="nav-item {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}">
+          <a class="nav-link  {{ request()->routeIs('admin.dashboard') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 45 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>shop </title>
@@ -69,11 +69,11 @@
                 </g>
               </svg>
             </div>
-            <span class="nav-link-text ms-1">DashboardAdmin</span>
+            <span class="nav-link-text ms-1">Dashboard</span>
           </a>
         </li>
-        <li class="nav-item {{ request()->routeIs('tables') ? 'active' : '' }}">
-          <a class="nav-link  {{ request()->routeIs('tables') ? 'active' : '' }}" href="{{ route('tables') }}">
+        <li class="nav-item {{ request()->routeIs('admin-tables') ? 'active' : '' }}">
+          <a class="nav-link  {{ request()->routeIs('admin-tables') ? 'active' : '' }}" href="{{ route('admin-tables') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 42 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>office</title>
@@ -157,8 +157,8 @@
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Account pages</h6>
         </li>
-        <li class="nav-item {{ request()->routeIs('profiles') ? 'active' : '' }} " >
-          <a class="nav-link {{ request()->routeIs('profiles') ? 'active' : '' }} " href="{{ route('profiles') }}">
+        <li class="nav-item {{ request()->routeIs('admin-profiles') ? 'active' : '' }} " >
+          <a class="nav-link {{ request()->routeIs('admin-profiles') ? 'active' : '' }} " href="{{ route('admin-profiles') }}">
             <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
               <svg width="12px" height="12px" viewBox="0 0 46 42" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                 <title>customer-support</title>

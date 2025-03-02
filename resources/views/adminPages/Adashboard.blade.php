@@ -1,4 +1,4 @@
-@extends('layouts.dashboardlayout')  <!-- Extends a layout file -->
+@extends('layouts.Adminlayout')  <!-- Extends a layout file -->
 
 @section('title', 'Admindashboard')  <!-- Defining a section with a single line -->
 

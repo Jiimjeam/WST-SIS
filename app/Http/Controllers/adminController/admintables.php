@@ -5,9 +5,9 @@ namespace App\Http\Controllers\adminController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-class admindashboard extends Controller
+class admintables extends Controller
 {
-    public function indexAdmin() { 
-        return view('adminPages.Adashboard');
+    public function Atables() { 
+        return view('adminPages.adminTables');
     }
 }
