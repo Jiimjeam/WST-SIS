@@ -6,6 +6,7 @@ use App\Http\Controllers\adminController\adminstudentTables;
 use App\Http\Controllers\adminController\adminprofiles;
 use App\Http\Controllers\adminController\adminsubjects;
 use App\Http\Controllers\adminController\adminenrolled;
+use App\Http\Controllers\adminController\adminaddgrades;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\studentController\studentdashboard;
 use Illuminate\Support\Facades\Route;
