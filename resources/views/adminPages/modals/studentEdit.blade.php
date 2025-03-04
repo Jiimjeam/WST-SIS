@@ -1,3 +1,4 @@
+
 <!-- edit student modal -->
 <div class="modal fade" id="editStudentModal" tabindex="-1" aria-labelledby="editStudentModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -36,3 +37,34 @@
         </div>
     </div>
 </div>
+
+
+<!-- Include SweetAlert Library -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- SweetAlert for Success & Error Messages -->
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Success!',
+        text: '{{ session("success") }}',
+        confirmButtonColor: '#3085d6',
+        confirmButtonText: 'OK'
+    }).then(() => {
+        window.location.href = "{{ route('students.index') }}"; // Redirect to table page
+    });
+</script>
+@endif
+
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Error!',
+        text: '{{ session("error") }}',
+        confirmButtonColor: '#d33',
+        confirmButtonText: 'OK'
+    });
+</script>
+@endif

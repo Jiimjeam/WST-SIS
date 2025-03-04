@@ -27,6 +27,10 @@
                         <label for="age" class="form-label">Age</label>
                         <input type="number" class="form-control" name="age" id="age" value="" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <input type="password" class="form-control" name="password" id="password" value="" required>
+                    </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Save</button>

@@ -20,7 +20,30 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        "Store Student" . $request;
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'age' => 'required',
+            'password' => 'required',
+        ]);;
+
+        $student = new Student();
+        $studentList = Student::all();
+        $student->name = $data['name'];
+        $student->email = $data['email'];
+        $student->address = $data['address'];
+        $student->age = $data['age'];
+        $student->password = $data['password'];
+        $student->save();
+        return redirect()->route('Admin Student Tables', 
+        [
+            "ConfirmMessage" => "Student Deleted Successfully", 
+            "alertType" => "success", 
+            "studentList" => $studentList 
+        ]
+    );
+        
     }
 
     /**
@@ -52,20 +75,27 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
+        
         $student = Student::find($id);
+        
         if (!$student) {
-            return response()->json(['message' => 'Student not found'], 404);
+            return redirect()->back()->with('error', 'Student not found!');
         }
-
+    
+        
         $data = $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'address' => 'required',
-            'age' => 'required',
-        ]);;
-
-        return "updating " . $student . "<br>with: " . json_encode($data); 
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|unique:students,email,' . $id,
+            'address' => 'required|string|max:255',
+            'age' => 'required|integer|min:1',
+        ]);
+    
+        
+        $student->update($data);
+    
+        return redirect()->route('Admin Student Tables')->with('success', 'Student updated successfully!');
     }
+    
 
     /**
      * Remove the specified resource from storage.
