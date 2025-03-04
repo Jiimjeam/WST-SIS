@@ -31,9 +31,22 @@ class SubjectController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreSubjectRequest $request)
+    public function store(Request $request)
     {
-        //
+        $data = $request->validate([
+            'name' => 'required',
+            'code' => 'required',
+            'units' => 'required',
+        ]);
+    
+        $subject = new Subject();
+        $subject->name = $data['name'];
+        $subject->code = $data['code'];
+        $subject->units = $data['units'];
+    
+        $subject->save();
+    
+        return redirect()->route('Admin Subjects')->with('success', 'Subject created successfully!');
     }
 
     /**

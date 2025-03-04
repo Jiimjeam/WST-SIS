@@ -46,7 +46,7 @@
         <div class="card mb-4">
           <div class="card-header pb-0">
             <h6>Subject Table</h6>
-            <a href="">
+            <a href="{{ route('subject.create') }}">
               <button class="btn btn-success btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addStudentModal">
                 <i class="fas fa-user-plus"></i> Add Subject
               </button>
