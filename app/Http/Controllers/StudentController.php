@@ -92,12 +92,18 @@ class StudentController extends Controller
     public function update(Request $request, string $id)
     {
         $student = Student::find($id);
-
         if (!$student) {
             return response()->json(['message' => 'Student not found'], 404);
         }
 
-        return "updating " . $student; 
+        $data = $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'address' => 'required',
+            'age' => 'required',
+        ]);;
+
+        return "updating " . $student . "<br>with: " . json_encode($data); 
     }
 
     /**
