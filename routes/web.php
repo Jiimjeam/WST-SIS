@@ -5,6 +5,7 @@ use App\Models\User;
 
 // admin
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\StudentPageController;
 
 use App\Http\Controllers\ProfileController;
@@ -27,6 +28,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/addGrades', [StudentPageController::class, 'adminAddgrades'])->name('Admin Add Grades');
 
     Route::resource('students', StudentController::class);
+    Route::resource('subject', SubjectController::class);
 }); 
 
 
