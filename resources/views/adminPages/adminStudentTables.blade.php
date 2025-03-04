@@ -125,7 +125,7 @@
 
 <!-- Delete Modal -->
   <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-sm">
+    <div class="modal-dialog modal-md">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
@@ -142,13 +142,28 @@
   </div>
 
   <script>
-    function deleteStudent(id) {
-      $('#confirmDeleteBtn').on('click', function () {
-        var form = document.getElementById("student-form-" + id);
-        form.submit();
-        $('.bd-example-modal-sm').modal('hide');
+  function deleteStudent(id) {
+    $('#confirmDeleteBtn').off('click').on('click', function () {
+      var form = document.getElementById("student-form-" + id);
+      
+      $.ajax({
+        url: form.action,
+        type: 'POST',
+        data: new FormData(form),
+        processData: false,
+        contentType: false,
+        success: function(response) {
+          $('.bd-example-modal-sm').modal('hide');
+          location.reload(); // Refresh the page to update the table
+        },
+        error: function(xhr) {
+          alert("Error deleting student. Please try again.");
+        }
       });
-      $('.bd-example-modal-sm').modal('show');
-    }
-  </script>
+    });
+
+    $('.bd-example-modal-sm').modal('show');
+  }
+</script>
+
 @endsection
