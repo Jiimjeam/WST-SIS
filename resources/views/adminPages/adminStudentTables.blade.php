@@ -192,10 +192,6 @@
     $('.bd-example-modal-sm').modal('show');
   }
 
-
-
-
-
   
 </script>
 @endsection

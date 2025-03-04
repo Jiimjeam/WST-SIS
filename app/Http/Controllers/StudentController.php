@@ -26,27 +26,22 @@ class StudentController extends Controller
             'address' => 'required',
             'age' => 'required',
             'password' => 'required',
-            // 'role' => 'string',
-        ]);;
-
+        ]);
+    
+        $data['role'] = $data['role'] ?? 'student';
+    
         $student = new Student();
-        $studentList = Student::all();
         $student->name = $data['name'];
         $student->email = $data['email'];
         $student->address = $data['address'];
         $student->age = $data['age'];
-        $student->password = $data['password'];
-        
+        $student->password = bcrypt($data['password']); // Hash password before saving
+    
         $student->save();
-        return redirect()->route('Admin Student Tables', 
-        [
-            "ConfirmMessage" => "Student Deleted Successfully", 
-            "alertType" => "success", 
-            "studentList" => $studentList 
-        ]
-    );
-        
+    
+        return redirect()->route('Admin Student Tables')->with('success', 'Student created successfully!');
     }
+    
 
     /**
      * Display the specified resource.
