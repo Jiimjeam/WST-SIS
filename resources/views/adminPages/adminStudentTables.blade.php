@@ -81,14 +81,20 @@
                       <span class="text-secondary text-xs font-weight-bold">{{ $student->address }}</span>
                     </td>
                     <td class="text-center">
+
                       <a href="{{ route('student.show', $student->id ) }}">
                         <button class="btn btn-md btn-info view-btn">
                           <i class="fas fa-eye"></i>
                         </button>
-                      </a>
+                      </a> &nbsp;
+                      
+                      
+                      <a href="{{ route('student.edit', $student->id ) }}">
                       <button class="btn btn-md btn-primary">
-                        <i class="fas fa-edit"></i>
-                      </button>
+                          <i class="fas fa-edit"></i>  
+                        </button>
+                      </a> &nbsp;
+                    
                       <a href="#" onclick="deleteStudent({{ $student->id }})">
                         <button class="btn btn-md btn-danger">
                           <i class="fas fa-archive"></i>
@@ -110,30 +116,63 @@
     </div>
   </div>
 
-  <!-- Modal for confirmation -->
+
+<!-- Delete Modal -->
   <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
         </div>
         <div class="modal-body">
           <p>Are you sure you want to delete this student?</p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Student edit modal
+  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel">Edit Student</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+            <form action="{{ route('student.edit', $student->id) }}" method="POST">
+                    @csrf
+                    @method('PATCH')
+                    <div class="form-group mb-3">
+                        <label for="edit-name" class="form-label">Name</label>
+                        <input type="text" name="id" id="id" value="{{ $student->name }}" class="form-control"  required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="edit-email" class="form-label">Email</label>
+                        <input type="text" name="id" id="id" value="{{ $student->email }}" class="form-control"  required>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="edit-address" class="form-label">Address</label>
+                        <input type="text" name="id" id="id" value="{{ $student->address }}" class="form-control"  required>
+                    </div>  
+                    <div class="form-group mb-3">
+                        <label for="edit-age" class="form-label">Age</label>
+                        <input type="text" name="id" id="id" value="{{ $student->age }}" class="form-control"  required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->
+
   <script>
     function deleteStudent(id) {
-      // Open confirmation modal
       $('#confirmDeleteBtn').on('click', function () {
         var form = document.getElementById("student-form-" + id);
         form.submit();

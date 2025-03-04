@@ -76,9 +76,14 @@ class StudentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Student $student)
     {
-        //
+        return view('adminPages.modals.studentEdit',
+            [
+                "student" => $student
+            ]
+            
+    );
     }
 
     /**
@@ -86,7 +91,13 @@ class StudentController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $student = Student::find($id);
+
+        if (!$student) {
+            return response()->json(['message' => 'Student not found'], 404);
+        }
+
+        return "updating " . $student; 
     }
 
     /**

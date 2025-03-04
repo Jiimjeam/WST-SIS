@@ -5,16 +5,15 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Symfony\Component\HttpFoundation\Response;
 
-class AdminMiddleware
+class Is_Admin
 {
-    public function handle(Request $request, Closure $next): Response
+    public function handle(Request $request, Closure $next) 
     {
-        if (Auth::check() && Auth::user()->role === 'admin') { // Fix this line
+        if (Auth::check() && Auth::user()->admin) {
             return $next($request);
         }
-
-        return redirect('/student/dashboard')->with('error', 'Access denied!');
+        abort(403, 'Unauthorized action.');
     }
+  
 }
