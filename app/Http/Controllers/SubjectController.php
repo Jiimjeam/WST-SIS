@@ -25,7 +25,7 @@ class SubjectController extends Controller
      */
     public function create()
     {
-        //
+        return view("adminPages.modals.subject.subjectCreate");
     }
 
     /**
@@ -41,7 +41,7 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
-        return view ('adminPages.modals.viewSubject', 
+        return view ('adminPages.modals.subject.viewSubject', 
             [
                 "subject" => $subject,
             ]
@@ -53,7 +53,7 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        return view('adminPages.modals.subjectEdit',
+        return view('adminPages.modals.subject.subjectEdit',
             [
                 "subject" => $subject
             ]

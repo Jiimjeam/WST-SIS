@@ -12,7 +12,7 @@ class StudentController extends Controller
      */
     public function create()
     {
-        return view("adminPages.modals.studentCreate");
+        return view("adminPages.modals.student.studentCreate");
     }
 
     /**
@@ -48,7 +48,7 @@ class StudentController extends Controller
      */
     public function show(Student $student)
     {
-        return view ('adminPages.modals.viewStudent', 
+        return view ('adminPages.modals.student.viewStudent', 
             [
                 "student" => $student,
             ]
@@ -60,7 +60,7 @@ class StudentController extends Controller
      */
     public function edit(Student $student)
     {
-        return view('adminPages.modals.studentEdit',
+        return view('adminPages.modals.student.studentEdit',
             [
                 "student" => $student
             ]
