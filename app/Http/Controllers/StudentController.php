@@ -26,6 +26,7 @@ class StudentController extends Controller
             'address' => 'required',
             'age' => 'required',
             'password' => 'required',
+            // 'role' => 'string',
         ]);;
 
         $student = new Student();
@@ -35,6 +36,7 @@ class StudentController extends Controller
         $student->address = $data['address'];
         $student->age = $data['age'];
         $student->password = $data['password'];
+        
         $student->save();
         return redirect()->route('Admin Student Tables', 
         [

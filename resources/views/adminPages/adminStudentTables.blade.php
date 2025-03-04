@@ -94,12 +94,12 @@
                         </button>
                       </a> &nbsp;
                       
-                      
                       <a href="{{ route('students.edit', $student->id ) }}">
                       <button class="btn btn-md btn-primary" data-bs-toggle="modal" data-bs-target="#editStudentModal">
                           <i class="fas fa-edit"></i>  
                         </button>
                       </a> &nbsp;
+
                     
                       <a href="#" onclick="deleteStudent({{ $student->id }})">
                         <button class="btn btn-md btn-danger">
@@ -122,10 +122,9 @@
     </div>
   </div>
 
-  <!-- Include SweetAlert Library -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- SweetAlert for Success & Error Messages -->
+  <!-- delete student successfull modal -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if(session('success'))
 <script>
     Swal.fire({
@@ -151,7 +150,7 @@
 @endif
 
 
-<!-- Delete Modal -->
+<!-- Delete confirmation modal Modal -->
   <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md">
       <div class="modal-content">
