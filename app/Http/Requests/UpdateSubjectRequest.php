@@ -11,7 +11,7 @@ class UpdateSubjectRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,17 @@ class UpdateSubjectRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'code' => 'required',
+            'units' => 'required',
         ];
+    }
+
+    protected function prepareForValidation(): void {
+        $this->merge([
+            'name' => strip_tags($this->name),
+            'code' => strip_tags($this->code),
+            'units' => strip_tags($this->units),
+        ]);
     }
 }

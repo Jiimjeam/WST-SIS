@@ -73,7 +73,7 @@
                     <td>
                     <div class="d-flex px-2 py-1">
                         <div>
-                          <img src="../assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                          <img src="../assets/img/books.jpg" class="avatar avatar-sm me-3" alt="user1">
                         </div>
                         <div class="d-flex flex-column justify-content-center">
                           <h6 class="badge badge-sm bg-gradient-primary">{{ $subject->name }}</h6>
@@ -88,13 +88,13 @@
                     </td>
                     <td class="text-center">
 
-                      <a href="">
+                      <a href="{{ route('subject.show', $subject->id ) }}">
                         <button class="btn btn-md btn-info view-btn">
                           <i class="fas fa-eye"></i>
                         </button>
                       </a> &nbsp;
                       
-                      <a href="">
+                      <a href="{{ route('subject.edit', $subject->id ) }}">
                       <button class="btn btn-md btn-primary" data-bs-toggle="modal" data-bs-target="#editStudentModal">
                           <i class="fas fa-edit"></i>  
                         </button>

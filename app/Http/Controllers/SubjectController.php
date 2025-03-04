@@ -3,8 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subject;
-use App\Http\Requests\StoreSubjectRequest;
-use App\Http\Requests\UpdateSubjectRequest;
+use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
@@ -42,7 +41,11 @@ class SubjectController extends Controller
      */
     public function show(Subject $subject)
     {
-        //
+        return view ('adminPages.modals.viewSubject', 
+            [
+                "subject" => $subject,
+            ]
+        );
     }
 
     /**
@@ -50,15 +53,35 @@ class SubjectController extends Controller
      */
     public function edit(Subject $subject)
     {
-        //
+        return view('adminPages.modals.subjectEdit',
+            [
+                "subject" => $subject
+            ]
+    );
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdateSubjectRequest $request, Subject $subject)
+    public function update(Request $request, string $id)
     {
-        //
+        $subject = Subject::find($id);
+        
+        if (!$subject) {
+            return redirect()->back()->with('error', 'Student not found!');
+        }
+    
+        
+        $data = $request->validate([
+            'name' => 'required',
+            'code' => 'required|unique:subjects,code,' . $id,
+            'units' => 'required',
+        ]);
+    
+        
+        $subject->update($data);
+    
+        return redirect()->route('Admin Subjects')->with('success', 'Subject updated successfully!');
     }
 
     /**
