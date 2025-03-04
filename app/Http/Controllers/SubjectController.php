@@ -11,9 +11,14 @@ class SubjectController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function adminSubject()
     {
-        //
+        $subjectList = Subject::all();
+        return view ('adminPages.adminSubjects', 
+            [
+                'subjectList' => $subjectList
+            ]
+        );
     }
 
     /**
@@ -61,6 +66,12 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        //
+        $subject->delete(); 
+        $subjectList = Subject::all();
+        return view ("adminPages.adminSubjects", [
+            "ConfirmMessage" => "Subject Deleted Successfully", 
+            "alertType" => "success", 
+            "subjectList" => $subjectList
+        ]);
     }
 }

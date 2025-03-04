@@ -22,7 +22,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [StudentPageController::class, 'adminDashboard'])->name('Admin Dashboard');
     Route::get('/student', [StudentPageController::class, 'adminStudentTable'])->name('Admin Student Tables');
-    Route::get('/subjects', [StudentPageController::class, 'adminSubjects'])->name('Admin Subjects');
+    Route::get('/subjects', [SubjectController::class, 'adminSubject'])->name('Admin Subjects');
     Route::get('/profiles', [StudentPageController::class, 'adminProfile'])->name('Admin Profile');
     Route::get('/enrolled', [StudentPageController::class, 'adminEnrolledStudents'])->name('Admin Enrolled Students');
     Route::get('/addGrades', [StudentPageController::class, 'adminAddgrades'])->name('Admin Add Grades');
