@@ -11,6 +11,7 @@
   <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
   <script>
     $(document).ready(function () {
@@ -45,6 +46,11 @@
         <div class="card mb-4">
           <div class="card-header pb-0">
             <h6>Authors Table</h6>
+            <a href="{{ route('students.create') }}">
+              <button class="btn btn-success btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addStudentModal">
+                <i class="fas fa-user-plus"></i> Add Student
+              </button>
+            </a>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
@@ -82,15 +88,15 @@
                     </td>
                     <td class="text-center">
 
-                      <a href="{{ route('student.show', $student->id ) }}">
+                      <a href="{{ route('students.show', $student->id ) }}">
                         <button class="btn btn-md btn-info view-btn">
                           <i class="fas fa-eye"></i>
                         </button>
                       </a> &nbsp;
                       
                       
-                      <a href="{{ route('student.edit', $student->id ) }}">
-                      <button class="btn btn-md btn-primary">
+                      <a href="{{ route('students.edit', $student->id ) }}">
+                      <button class="btn btn-md btn-primary" data-bs-toggle="modal" data-bs-target="#editStudentModal">
                           <i class="fas fa-edit"></i>  
                         </button>
                       </a> &nbsp;
@@ -100,7 +106,7 @@
                           <i class="fas fa-archive"></i>
                         </button>
                       </a>
-                      <form method="POST" action="{{ route('student.destroy', $student->id) }}" id="student-form-{{ $student->id }}">
+                      <form method="POST" action="{{ route('students.destroy', $student->id) }}" id="student-form-{{ $student->id }}">
                         @csrf
                         @method('DELETE')
                       </form>
@@ -134,42 +140,6 @@
       </div>
     </div>
   </div>
-
-  <!-- Student edit modal
-  <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="editModalLabel">Edit Student</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-            <form action="{{ route('student.edit', $student->id) }}" method="POST">
-                    @csrf
-                    @method('PATCH')
-                    <div class="form-group mb-3">
-                        <label for="edit-name" class="form-label">Name</label>
-                        <input type="text" name="id" id="id" value="{{ $student->name }}" class="form-control"  required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="edit-email" class="form-label">Email</label>
-                        <input type="text" name="id" id="id" value="{{ $student->email }}" class="form-control"  required>
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="edit-address" class="form-label">Address</label>
-                        <input type="text" name="id" id="id" value="{{ $student->address }}" class="form-control"  required>
-                    </div>  
-                    <div class="form-group mb-3">
-                        <label for="edit-age" class="form-label">Age</label>
-                        <input type="text" name="id" id="id" value="{{ $student->age }}" class="form-control"  required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Update</button>
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div> -->
 
   <script>
     function deleteStudent(id) {

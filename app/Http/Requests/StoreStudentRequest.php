@@ -11,7 +11,7 @@ class StoreStudentRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,15 @@ class StoreStudentRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => 'required',
+            'address' => 'required'
         ];
+    }
+
+    protected function prepareForValidation(): void {
+        $this->merge([
+            'name' => strip_tags($this->name),
+            'address' => strip_tags($this->address),
+        ]);
     }
 }

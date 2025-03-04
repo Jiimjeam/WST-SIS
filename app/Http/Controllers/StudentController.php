@@ -8,49 +8,11 @@ use Illuminate\Http\Request;
 class StudentController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     */
-    public function getAllStudents()
-    {
-        $studentList = Student::all();
-        return view ('adminPages.adminStudentTables', 
-            [
-                'studentList' => $studentList
-            ]
-        );
-    } 
-
-    public function adminDashboard()
-    {
-        return view ('adminPages.Adashboard');
-    } 
-
-    public function adminProfile()
-    {
-        return view ('adminPages.adminProfiles');
-    } 
-
-    public function adminSubjects()
-    {
-        return view ('adminPages.adminSubjects');
-    } 
-
-    public function adminEnrolledStudents()
-    {
-        return view ('adminPages.adminEnrolled');
-    } 
-
-    public function adminAddgrades()
-    {
-        return view ('adminPages.adminaddgrades');
-    } 
-
-    /**
      * Show the form for creating a new resource.
      */
     public function create()
     {
-        //
+        return view("adminPages.modals.studentCreate");
     }
 
     /**
@@ -58,7 +20,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        "Store Student" . $request;
     }
 
     /**
@@ -82,7 +44,6 @@ class StudentController extends Controller
             [
                 "student" => $student
             ]
-            
     );
     }
 

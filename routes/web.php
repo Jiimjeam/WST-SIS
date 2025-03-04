@@ -2,7 +2,11 @@
 
 use App\Models\Student;
 use App\Models\User;
+
+// admin
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\StudentPageController;
+
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\studentController\studentdashboard;
 use Illuminate\Support\Facades\Route;
@@ -15,17 +19,14 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 
 //Admin Pages Routes
 Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
-    Route::get('/dashboard', [StudentController::class, 'adminDashboard'])->name('Admin Dashboard');
-    Route::get('/students', [StudentController::class, 'getAllStudents'])->name('Admin Student Tables');
-    Route::get('/subjects', [StudentController::class, 'adminSubjects'])->name('Admin Subjects');
-    Route::get('/profiles', [StudentController::class, 'adminProfile'])->name('Admin Profile');
-    Route::get('/enrolled', [StudentController::class, 'adminEnrolledStudents'])->name('Admin Enrolled Students');
-    Route::get('/addGrades', [StudentController::class, 'adminAddgrades'])->name('Admin Add Grades');
-    
-    Route::get('/{student}', [StudentController::class, 'show'])->name('student.show');
-    Route::delete('/{student}', [StudentController::class, 'destroy'])->name('student.destroy');
-    Route::get('/{student}/edit', [StudentController::class, 'edit'])->name('student.edit');
-    Route::patch('/{student}', [StudentController::class, 'update'])->name('student.update');
+    Route::get('/dashboard', [StudentPageController::class, 'adminDashboard'])->name('Admin Dashboard');
+    Route::get('/student', [StudentPageController::class, 'adminStudentTable'])->name('Admin Student Tables');
+    Route::get('/subjects', [StudentPageController::class, 'adminSubjects'])->name('Admin Subjects');
+    Route::get('/profiles', [StudentPageController::class, 'adminProfile'])->name('Admin Profile');
+    Route::get('/enrolled', [StudentPageController::class, 'adminEnrolledStudents'])->name('Admin Enrolled Students');
+    Route::get('/addGrades', [StudentPageController::class, 'adminAddgrades'])->name('Admin Add Grades');
+
+    Route::resource('students', StudentController::class);
 }); 
 
 
