@@ -178,20 +178,20 @@
             <span class="nav-link-text ms-1">Profile</span>
           </a>
         </li>       
-  <li class="nav-item">
-    <form class="nav-item d-flex align-items-center" method="POST" action="{{ route('logout') }}">
-      @csrf
-      <button type="submit" class="nav-link d-flex align-items-center w-100 border-0 bg-transparent">
-        <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
-          <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M16 17L21 12M21 12L16 7M21 12H9" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            <path d="M3 3V21H13" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </div>
-        <span class="nav-link-text ms-1">Log Out</span>
-      </button>
+        <li class="nav-item">
+    <form id="logout-form" class="nav-item d-flex align-items-center" method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="button" id="logout-btn" class="nav-link d-flex align-items-center w-100 border-0 bg-transparent">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+                <svg width="16px" height="16px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M16 17L21 12M21 12L16 7M21 12H9" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M3 3V21H13" stroke="#000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+            <span class="nav-link-text ms-1">Log Out</span>
+        </button>
     </form>
-  </li>
+</li>
 </ul>
 </div>
 
@@ -595,6 +595,27 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/soft-ui-dashboard.min.js?v=1.1.0"></script>
-</body>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+  <script>
+    document.getElementById("logout-btn").addEventListener("click", function (event) {
+        event.preventDefault(); // Prevent the default form submission
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You will be logged out of your account.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, log me out"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                document.getElementById("logout-form").submit(); // Submit the form if confirmed
+            }
+        });
+    });
+</script>
+
+</body>
 </html>

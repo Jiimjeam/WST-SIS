@@ -116,7 +116,7 @@
     </div>
   </div>
 
-  <!-- delete student successfull modal -->
+  <!-- delete enrollment successfull modal -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 @if(session('success'))
 <script>
@@ -187,7 +187,6 @@
 
   
 </script>
-
 @endsection
 
 
