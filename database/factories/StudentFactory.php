@@ -30,9 +30,8 @@ class StudentFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'address' => $this->faker->address,
             'age' => $this->faker->numberBetween(18, 25),
-            'password' => bcrypt('password'), // Make sure to hash the password
-            'role' => 'student', // Assign a default role value
-            
+            'password' => Hash::make('password123'),
+            'role' => 'student',  
         ];
     }
 }

@@ -3,7 +3,9 @@
 use App\Models\Student;
 use App\Models\User;
 
-// admin
+use Illuminate\Http\Request;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\StudentPageController;
@@ -16,6 +18,29 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
+
+
+  
+// Route::get('/email/verify', function () {
+//     return view('auth.verify-email');
+// })->middleware('auth')->name('verification.notice');
+ 
+// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+//     $request->fulfill();
+ 
+//     return redirect('/dashboard'); // Closing quote added here
+// })->middleware(['auth', 'signed'])->name('verification.verify');
+ 
+// Route::post('/email/verification-notification', function (Request $request) {
+//     $request->user()->sendEmailVerificationNotification();
+ 
+//     return back()->with('message', 'Verification link sent!');
+// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+
+
+
+
+
 
 
 //Admin Pages Routes

@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-// use Illuminate\Contracts\Auth\MustVerifyEmail;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable 
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -35,9 +35,14 @@ class User extends Authenticatable
     ];
 
      public function isAdmin()
-    {
-        return $this->role === 'admin';
-    }
+        {
+            return $this->role === 'admin';
+        }
+
+    public function isStudent()
+        {
+            return $this->role === 'student';
+        }
 
     /**
      * Get the attributes that should be cast.
@@ -51,4 +56,6 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    
 }

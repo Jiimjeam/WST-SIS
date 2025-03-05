@@ -22,7 +22,7 @@ class StudentController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'email' => 'required',
+            'email' => 'required|email|unique:students,email|unique:users,email',
             'address' => 'required',
             'age' => 'required',
             'password' => 'required',
@@ -37,8 +37,9 @@ class StudentController extends Controller
         $student->age = $data['age'];
         $student->password = bcrypt($data['password']); // Hash password before saving
     
+        
         $student->save();
-    
+        $student->sendEmailVerificationNotification();
         return redirect()->route('Admin Student Tables')->with('success', 'Student created successfully!');
     }
     

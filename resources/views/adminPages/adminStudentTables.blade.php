@@ -100,7 +100,6 @@
                         </button>
                       </a> &nbsp;
 
-                    
                       <a href="#" onclick="deleteStudent({{ $student->id }})">
                         <button class="btn btn-md btn-danger">
                           <i class="fas fa-archive"></i>

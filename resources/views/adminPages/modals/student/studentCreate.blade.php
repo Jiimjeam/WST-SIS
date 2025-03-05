@@ -16,6 +16,11 @@
                         <input type="text" class="form-control" name="name" id="name" value="" required>
                     </div>
                     <div class="mb-3">
+                    @error('email')
+                        <div class="text-danger fw-bold mt-1" style="font-size: 14px;">
+                            <i class="bi bi-exclamation-circle-fill"></i> {{ $message }}
+                        </div>
+                    @enderror
                         <label for="email" class="form-label">Email</label>
                         <input type="email" class="form-control" name="email" id="email" value="" required>
                     </div>
