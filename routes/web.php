@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\EnrollmentController;
+use App\Http\Controllers\AddgradeController;
 
 use App\Http\Controllers\StudentPageController;
 use App\Http\Controllers\ProfileController;
@@ -32,6 +33,7 @@ Route::middleware(['auth', 'verified', 'can:is-admin'])->prefix('admin')->group(
     Route::resource('students', StudentController::class);
     Route::resource('subject', SubjectController::class);
     Route::resource('enrollment', EnrollmentController::class);
+    Route::resource('grades', AddgradeController::class);
 }); 
 
 
