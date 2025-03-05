@@ -1,4 +1,3 @@
-           
 @extends('layouts.Adminlayout')
 
 @section('title', 'Admindashboard')
@@ -41,153 +40,107 @@
     });
   </script>
 
-  <div class="container-fluid py-4">
-    <div class="row">
-      <div class="col-12">
-        <div class="card mb-4">
-          <div class="card-header pb-0">
-            <h6>Grades Table</h6>
-            <a href="">
-              <button class="btn btn-success btn-sm rounded-pill px-3" data-bs-toggle="modal" data-bs-target="#addStudentModal">
-                <i class="fas fa-user-plus"></i> Add Grade
-              </button>
-            </a>
-          </div>
-          <div class="card-body px-0 pt-0 pb-2">
-            <div class="table-responsive p-0">
-              <table id="myDataTable" class="table align-items-center mb-0">
-                <thead>
-                  <tr>
-                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7">ID</th>
-                    <th class="text-uppercase text-secondary text-xs font-weight-bolder opacity-7 ps-2">Student</th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Subject</th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Date Enrolled</th>
-                    <th class="text-center text-uppercase text-secondary text-xs font-weight-bolder opacity-7">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                 
-                  <tr>
-                    <td>   
-                        <h6 class="mb-0 text-sm"></h6>
-                    </td>
-                    <td>
-                    <div class="d-flex px-2 py-1">
-                        <div>
-                          <img src="../assets/img/team-3.jpg" class="avatar avatar-sm me-3" alt="user1">
-                        </div>
-                        <div class="d-flex flex-column justify-content-center">
-                          <h6 class="badge badge-sm bg-gradient-primary"></h6>
-                        </div>
-                      </div>
-                    </td>
-                    <td class="align-middle text-center text-sm">
-                      <span class="text-secondary text-xs font-weight-bold"></span>
-                    </td>
-                    <td class="align-middle text-center">
-                      <span class="text-secondary text-xs font-weight-bold"></span>
-                    </td>
-                    <td class="text-center">
+<div class="container mt-4">
+    <h1 class="mb-4 text-primary fw-bold">Grades</h1>
+    <div class="card shadow-sm border-0">
+        <div class="card-body">
+            <form action="{{ route('grades.index') }}" method="GET" class="mb-4">
+                <div class="row g-2 align-items-center">
+                    <div class="col-md-4">
+                        <label for="subject_id" class="form-label fw-semibold">Filter by Subject:</label>
+                        <select name="subject_id" id="subject_id" class="form-select" onchange="this.form.submit()">
+                            <option value="">All Subjects</option>
+                            @foreach ($subjects as $subject)
+                                <option value="{{ $subject->id }}" {{ $selectedSubject = $subject->id ? 'selected' : '' }}>
+                                    {{ $subject->name }}
+                                </option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </form>
 
-                      <a href="">
-                      <button class="btn btn-md btn-primary">
-                          <i class="fas fa-edit"></i>  
-                        </button>
-                      </a> &nbsp;
+            <!-- Enrolled Students Table -->
+            <div class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Student</th>
+                            <th>Subject</th>
+                            <th>Grade</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($enrollments as $enrollment)
+                            <tr>
+                                <td>{{ $enrollment->student->name }}</td>
+                                <td>{{ $enrollment->subject->name }}</td>
+                                <td>
+                                    <span class="badge {{ $enrollment->grades->isNotEmpty() ? ($enrollment->grades->first()->grade >= 3.0 ? 'bg-success' : 'bg-danger') : 'bg-secondary' }}">
+                                        {{ $enrollment->grades->isNotEmpty() ? $enrollment->grades->first()->grade : 'N/A' }}
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editGradeModal{{ $enrollment->id }}">
+                                        <i class="bi bi-pencil-square"></i> Edit
+                                    </button>
 
-                    
-                      <a href="#" onclick="deleteEnrollment()">
-                        <button class="btn btn-md btn-danger">
-                          <i class="fas fa-archive"></i>
-                        </button>
-                      </a>
-                      <form method="POST" action="" id="enrollment-form-">
-                        @csrf
-                        @method('DELETE')
-                      </form>
-                    </td>
-                  </tr>
-                  
-                </tbody>
-              </table>
-            </div>
-          </div>
+                                    @if ($enrollment->grades->isNotEmpty())
+                                    <form action="{{ route('grades.destroy', $enrollment->grades->first()->id) }}" method="POST" class="d-inline-block">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to remove this grade?');">
+                                            <i class="bi bi-trash"></i> Remove
+                                        </button>
+                                    </form>
+                                    @endif
+                                </td>
+                            </tr>
+
+                            <!-- Edit Grade Modal -->
+                            <div class="modal fade" id="editGradeModal{{ $enrollment->id }}" tabindex="-1" aria-labelledby="editGradeModalLabel{{ $enrollment->id }}" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header bg-warning text-dark">
+                                            <h5 class="modal-title fw-bold" id="editGradeModalLabel{{ $enrollment->id }}">
+                                                Edit Grade for {{ $enrollment->student->name }}
+                                            </h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <form action="{{ route('grades.update', $enrollment->id) }}" method="POST">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-body">
+                                                <div class="mb-3">
+                                                    <label for="grade" class="form-label">Grade</label>
+                                                    <select name="grade" id="grade" class="form-select">
+                                                        @php
+                                                            $gradeOptions = [1.0, 1.25, 1.50, 1.75, 2.0, 2.25, 2.50, 2.75, 3.0, 3.25, 3.50, 3.75, 4.0, 4.25, 4.50, 4.75, 5.0];
+                                                        @endphp
+                                                        @foreach ($gradeOptions as $grade)
+                                                            <option value="{{ $grade }}" {{ $enrollment->grades->isNotEmpty() && $enrollment->grades->first()->grade == $grade ? 'selected' : '' }}>
+                                                                {{ $grade }}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div> 
         </div>
-      </div>
     </div>
-  </div>
-
-  <!-- delete enrollment successfull modal -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-@if(session('success'))
-<script>
-    Swal.fire({
-        icon: 'success',
-        title: 'Success!',
-        text: '{{ session("success") }}',
-        confirmButtonColor: '#3085d6',
-        confirmButtonText: 'OK'
-    });
-</script>
-@endif
-
-@if(session('error'))
-<script>
-    Swal.fire({
-        icon: 'error',
-        title: 'Error!',
-        text: '{{ session("error") }}',
-        confirmButtonColor: '#d33',
-        confirmButtonText: 'OK'
-    });
-</script>
-@endif
-
-
-<!-- Delete confirmation modal Modal -->
-  <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
-        </div>
-        <div class="modal-body">
-          <p>Are you sure you want to delete this Enroll data?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Delete</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script>
-  function deleteEnrollment(id) {
-    $('#confirmDeleteBtn').off('click').on('click', function () {
-      var form = document.getElementById("enrollment-form-" + id);
-      
-      $.ajax({
-        url: form.action,
-        type: 'POST',
-        data: new FormData(form),
-        processData: false,
-        contentType: false,
-        success: function(response) {
-          $('.bd-example-modal-sm').modal('hide');
-          location.reload(); // Refresh the page to update the table
-        },
-        error: function(xhr) {
-          alert("Error deleting Subject. Please try again.");
-        }
-      });
-    });
-
-    $('.bd-example-modal-sm').modal('show');
-  }
-
-  
-</script>
+</div>
 @endsection
 
  

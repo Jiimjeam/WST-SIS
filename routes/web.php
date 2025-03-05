@@ -9,7 +9,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\EnrollmentController;
-use App\Http\Controllers\AddgradeController;
+use App\Http\Controllers\GradeController;
 
 use App\Http\Controllers\StudentPageController;
 use App\Http\Controllers\ProfileController;
@@ -28,12 +28,12 @@ Route::middleware(['auth', 'verified', 'can:is-admin'])->prefix('admin')->group(
     Route::get('/subjects', [SubjectController::class, 'adminSubject'])->name('Admin Subjects');
     Route::get('/profiles', [StudentPageController::class, 'adminProfile'])->name('Admin Profile');
     Route::get('/enrolled', [EnrollmentController::class, 'index'])->name('Admin Enrolled Students');
-    Route::get('/addGrades', [StudentPageController::class, 'adminAddgrades'])->name('Admin Add Grades');
+    Route::get('/addGrades', [GradeController::class, 'index'])->name('Admin Add Grades');
 
     Route::resource('students', StudentController::class);
     Route::resource('subject', SubjectController::class);
     Route::resource('enrollment', EnrollmentController::class);
-    Route::resource('grades', AddgradeController::class);
+    Route::resource('grades', GradeController::class);
 }); 
 
 
@@ -42,10 +42,6 @@ Route::middleware(['auth', 'verified', 'can:is-admin'])->prefix('admin')->group(
 Route::get('/student/dashboard', [studentdashboard::class, 'indexStudent'])
     ->middleware(['auth' ,'verified'])
     ->name('dashboard');
-
-    Route::get('/tables', function () {
-        return view('studentPages.tables');
-    })->middleware(['auth', 'verified'])->name('tables');
     
     Route::get('/profiles', function () {
         return view('studentPages.profiles');
