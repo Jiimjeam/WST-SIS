@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Student;
+use App\Models\Subject;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,11 @@ class EnrollmentController extends Controller
      */
     public function index()
     {
-        //
+        $enrollments = Enrollment::with(['student', 'subject'])->get(); // Load related data
+        $students = Student::all(); // Fetch all students
+        $subjects = Subject::all(); // Fetch all subjects
+    
+        return view('adminPages.adminEnrolled', compact('enrollments', 'students', 'subjects'));
     }
 
     /**
@@ -20,7 +25,9 @@ class EnrollmentController extends Controller
      */
     public function create()
     {
-        //
+        $students = Student::all();
+        $subjects = Subject::all();
+        return view('adminPages.modals.enrollment.enrollment', compact('students', 'subjects'));
     }
 
     /**
@@ -28,7 +35,15 @@ class EnrollmentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'student_id' => 'required|exists:students,id',
+            'subject_id' => 'required|exists:subjects,id',
+            'enrollment_date' => 'required|date',
+        ]);
+    
+        Enrollment::create($request->all());
+    
+        return redirect()->route('Admin Enrolled Students')->with('success', 'Enrollment added successfully.');
     }
 
     /**

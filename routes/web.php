@@ -9,8 +9,8 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\EnrollmentController;
-use App\Http\Controllers\StudentPageController;
 
+use App\Http\Controllers\StudentPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\studentController\studentdashboard;
 use Illuminate\Support\Facades\Route;
@@ -20,37 +20,13 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
-
-  
-// Route::get('/email/verify', function () {
-//     return view('auth.verify-email');
-// })->middleware('auth')->name('verification.notice');
- 
-// Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-//     $request->fulfill();
- 
-//     return redirect('/dashboard'); // Closing quote added here
-// })->middleware(['auth', 'signed'])->name('verification.verify');
- 
-// Route::post('/email/verification-notification', function (Request $request) {
-//     $request->user()->sendEmailVerificationNotification();
- 
-//     return back()->with('message', 'Verification link sent!');
-// })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-
-
-
-
-
-
 //Admin Pages Routes
 Route::middleware(['auth', 'verified', 'can:is-admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [StudentPageController::class, 'adminDashboard'])->name('Admin Dashboard');
     Route::get('/student', [StudentPageController::class, 'adminStudentTable'])->name('Admin Student Tables');
     Route::get('/subjects', [SubjectController::class, 'adminSubject'])->name('Admin Subjects');
     Route::get('/profiles', [StudentPageController::class, 'adminProfile'])->name('Admin Profile');
-    Route::get('/enrolled', [StudentPageController::class, 'adminEnrolledStudents'])->name('Admin Enrolled Students');
+    Route::get('/enrolled', [EnrollmentController::class, 'index'])->name('Admin Enrolled Students');
     Route::get('/addGrades', [StudentPageController::class, 'adminAddgrades'])->name('Admin Add Grades');
 
     Route::resource('students', StudentController::class);
