@@ -75,6 +75,7 @@ class EnrollmentController extends Controller
      */
     public function destroy(Enrollment $enrollment)
     {
-        //
+        $enrollment->delete();
+        return redirect()->route('Admin Enrolled Students')->with('success', 'Enrollment deleted successfully.');
     }
 }

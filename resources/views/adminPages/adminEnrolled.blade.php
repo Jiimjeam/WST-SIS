@@ -88,19 +88,19 @@
                     </td>
                     <td class="text-center">
 
-                      <a href="">
+                      <a href="{{ route('enrollment.edit', $enroll->id) }}">
                       <button class="btn btn-md btn-primary">
                           <i class="fas fa-edit"></i>  
                         </button>
                       </a> &nbsp;
 
                     
-                      <a href="#" onclick="deleteEnrollment()">
+                      <a href="#" onclick="deleteEnrollment({{ $enroll->id }})">
                         <button class="btn btn-md btn-danger">
                           <i class="fas fa-archive"></i>
                         </button>
                       </a>
-                      <form method="POST" action="" id="subject-form-">
+                      <form method="POST" action="{{ route('enrollment.destroy', $enroll->id) }}" id="enrollment-form-{{ $enroll->id }}">
                         @csrf
                         @method('DELETE')
                       </form>
@@ -151,7 +151,7 @@
           <h5 class="modal-title" id="exampleModalLabel">Confirmation</h5>
         </div>
         <div class="modal-body">
-          <p>Are you sure you want to delete this student?</p>
+          <p>Are you sure you want to delete this Enroll data?</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -164,7 +164,7 @@
   <script>
   function deleteEnrollment(id) {
     $('#confirmDeleteBtn').off('click').on('click', function () {
-      var form = document.getElementById("subject-form-" + id);
+      var form = document.getElementById("enrollment-form-" + id);
       
       $.ajax({
         url: form.action,
@@ -177,7 +177,7 @@
           location.reload(); // Refresh the page to update the table
         },
         error: function(xhr) {
-          alert("Error deleting student. Please try again.");
+          alert("Error deleting Subject. Please try again.");
         }
       });
     });
