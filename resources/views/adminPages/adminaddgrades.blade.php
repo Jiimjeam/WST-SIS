@@ -4,6 +4,7 @@
 
 @section('Admindashboard')
   <!-- Link stylesheets and scripts for DataTable and icons -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
@@ -60,9 +61,8 @@
                 </div>
             </form>
 
-            <!-- Enrolled Students Table -->
             <div class="table-responsive">
-                <table class="table table-striped table-hover align-middle">
+                <table id="myDataTable" class="table table-striped table-hover align-middle" >
                     <thead class="table-dark">
                         <tr>
                             <th>Student</th>
@@ -128,7 +128,7 @@
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="submit" class="btn btn-primary">Save Changes</button>
+                                                <button type="submit" class="btn btn-success">Save Changes</button>
                                             </div>
                                         </form>
                                     </div>

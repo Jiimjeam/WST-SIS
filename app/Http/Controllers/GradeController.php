@@ -94,6 +94,6 @@ class GradeController extends Controller
 
         Log::info('Successfully deleted grade with ID: ' . $id);
 
-        return redirect()->route('adminPages.adminaddgrades')->with('success', 'Grade removed successfully.');
+        return redirect()->route('Admin Add Grades')->with('success', 'Grade removed successfully.');
     }
 }
