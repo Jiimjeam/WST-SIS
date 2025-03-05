@@ -95,7 +95,7 @@
                       </a> &nbsp;
                       
                       <a href="{{ route('subject.edit', $subject->id ) }}">
-                      <button class="btn btn-md btn-primary" data-bs-toggle="modal" data-bs-target="#editStudentModal">
+                      <button class="btn btn-md btn-primary">
                           <i class="fas fa-edit"></i>  
                         </button>
                       </a> &nbsp;
