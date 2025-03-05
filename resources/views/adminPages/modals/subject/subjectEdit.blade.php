@@ -93,7 +93,7 @@
 <body>
 
     <div class="container">
-        <h2>Edit Student</h2>
+        <h2>Edit Subject</h2>
         <form action="{{ route('subject.update', $subject->id) }}" method="post">
             @csrf
             @method('PATCH')

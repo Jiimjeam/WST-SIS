@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
+use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\StudentPageController;
 
 use App\Http\Controllers\ProfileController;
@@ -44,7 +45,7 @@ Route::get('/', [HomeController::class, 'home'])->name('home');
 
 
 //Admin Pages Routes
-Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
+Route::middleware(['auth', 'verified', 'can:is-admin'])->prefix('admin')->group(function () {
     Route::get('/dashboard', [StudentPageController::class, 'adminDashboard'])->name('Admin Dashboard');
     Route::get('/student', [StudentPageController::class, 'adminStudentTable'])->name('Admin Student Tables');
     Route::get('/subjects', [SubjectController::class, 'adminSubject'])->name('Admin Subjects');
@@ -54,6 +55,7 @@ Route::middleware(['auth', 'verified'])->prefix('admin')->group(function () {
 
     Route::resource('students', StudentController::class);
     Route::resource('subject', SubjectController::class);
+    Route::resource('enrollment', EnrollmentController::class);
 }); 
 
 
