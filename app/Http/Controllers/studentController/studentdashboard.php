@@ -11,15 +11,15 @@ use App\Models\Grade;
 
 class studentdashboard extends Controller
 {
-    public function indexStudent() { 
-        $student = Student::first(); // Fetch any student as an example
-    
-        $enrollments = Enrollment::where('student_id', $student->id ?? null)
-            ->with('subject', 'grades')
-            ->get();
-    
-        return view('studentPages.dashboard', compact('student', 'enrollments'));
-    }
-    
+public function indexStudent() { 
+    $student = Student::first(); // Fetch any student as an example
+
+    $enrollments = Enrollment::where('student_id', $student->id ?? null)
+        ->with('subject', 'grades')
+        ->get();
+
+    return view('studentPages.dashboard', compact('student', 'enrollments'));
+}
+
     
 }
