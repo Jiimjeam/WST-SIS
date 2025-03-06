@@ -42,7 +42,6 @@
   </script>
 
 <div class="container mt-4">
-    <h1 class="mb-4 text-primary fw-bold">Grades</h1>
     <div class="card shadow-sm border-0">
         <div class="card-body">
             <form action="{{ route('grades.index') }}" method="GET" class="mb-4">
@@ -113,8 +112,8 @@
                                             @method('PUT')
                                             <div class="modal-body">
                                                 <div class="mb-3">
-                                                    <label for="grades" class="form-label">Grade</label>
-                                                    <select name="grades" id="grades" class="form-select">
+                                                    <label for="grade" class="form-label">Grade</label>
+                                                    <select name="grade" id="grade" class="form-select">
                                                         @php
                                                             $gradeOptions = [1.0, 1.25, 1.50, 1.75, 2.0, 2.25, 2.50, 2.75, 3.0, 3.25, 3.50, 3.75, 4.0, 4.25, 4.50, 4.75, 5.0];
                                                         @endphp

@@ -12,15 +12,14 @@ use App\Models\Grade;
 class studentdashboard extends Controller
 {
     public function indexStudent() { 
-        // Check if student is authenticated
-        $student = Auth::guard('student')->user();
+        $student = Student::first(); // Fetch any student as an example
     
-        // Fetch the student's enrollments with subjects and grades
-        $enrollments = Enrollment::where('student_id', $student->id)
-            ->with('subject', 'grades') // Use 'grades' instead of 'grade'
+        $enrollments = Enrollment::where('student_id', $student->id ?? null)
+            ->with('subject', 'grades')
             ->get();
-        
+    
         return view('studentPages.dashboard', compact('student', 'enrollments'));
     }
+    
     
 }

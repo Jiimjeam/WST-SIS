@@ -34,10 +34,9 @@ class StudentController extends Controller
         $student->address = $data['address'];
         $student->age = $data['age'];
         $student->password = bcrypt($data['password']); // Hash password before saving
-    
+        $student->email_verified_at = now();
+        
         $student->save();
-        $student->sendEmailVerificationNotification();
-    
         return redirect()->route('Admin Student Tables')->with('success', 'Student created successfully!');
     }
     
