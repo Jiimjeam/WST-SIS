@@ -23,7 +23,10 @@ class StoreStudentRequest extends FormRequest
     {
         return [
             'name' => 'required',
-            'address' => 'required'
+            'email' => 'required|email|unique:students,email|unique:users,email',
+            'address' => 'required',
+            'age' => 'required',
+            'password' => 'required',
         ];
     }
 

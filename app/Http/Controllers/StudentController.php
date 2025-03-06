@@ -2,6 +2,10 @@
 
 
 namespace App\Http\Controllers;
+
+use App\Http\Requests\StoreStudentRequest;
+use App\Http\Requests\UpdateStudentRequest;
+
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -18,15 +22,9 @@ class StudentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreStudentRequest $request)
     {
-        $data = $request->validate([
-            'name' => 'required',
-             'email' => 'required|email|unique:students,email|unique:users,email',
-            'address' => 'required',
-            'age' => 'required',
-            'password' => 'required',
-        ]);
+        $data = $request->validated(); // Get validated data
     
         $data['role'] = $data['role'] ?? 'student';
     
@@ -37,9 +35,9 @@ class StudentController extends Controller
         $student->age = $data['age'];
         $student->password = bcrypt($data['password']); // Hash password before saving
     
-        
         $student->save();
         $student->sendEmailVerificationNotification();
+    
         return redirect()->route('Admin Student Tables')->with('success', 'Student created successfully!');
     }
     
@@ -71,30 +69,18 @@ class StudentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        
-        $student = Student::find($id);
-        
-        if (!$student) {
-            return redirect()->back()->with('error', 'Student not found!');
-        }
-    
-        
-        $data = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:students,email,' . $id,
-            'address' => 'required|string|max:255',
-            'age' => 'required|integer|min:1',
-        ]);
-    
-        
-        $student->update($data);
-    
-        return redirect()->route('Admin Student Tables')->with('success', 'Student updated successfully!');
-    }
-    
+    public function update(UpdateStudentRequest $request, string $id)
+{
+    $student = Student::find($id);
 
+    if (!$student) {
+        return redirect()->back()->with('error', 'Student not found!');
+    }
+
+    $student->update($request->validated());
+    return redirect()->route('Admin Student Tables')->with('success', 'Student updated successfully!');
+}
+    
     /**
      * Remove the specified resource from storage.
      */

@@ -21,9 +21,13 @@ class UpdateStudentRequest extends FormRequest
      */
     public function rules(): array
     {
+        $studentId = $this->route('id'); // Ensure this matches your route parameter
+
         return [
-            'name' => 'required',
-            'address' => 'required'
+            'name' => 'required|string|max:255',
+            'email' => 'required|email' . $studentId,
+            'address' => 'required|string|max:255',
+            'age' => 'required|integer|min:1',
         ];
     }
 

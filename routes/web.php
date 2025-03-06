@@ -2,22 +2,18 @@
 
 use App\Models\Student;
 use App\Models\User;
-
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
-
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\EnrollmentController;
 use App\Http\Controllers\GradeController;
-
 use App\Http\Controllers\StudentPageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\studentController\studentdashboard;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
-
 
 Route::get('/', [HomeController::class, 'home'])->name('home');
 
@@ -29,24 +25,20 @@ Route::middleware(['auth', 'verified', 'can:is-admin'])->prefix('admin')->group(
     Route::get('/profiles', [StudentPageController::class, 'adminProfile'])->name('Admin Profile');
     Route::get('/enrolled', [EnrollmentController::class, 'index'])->name('Admin Enrolled Students');
     Route::get('/addGrades', [GradeController::class, 'index'])->name('Admin Add Grades');
-
     Route::resource('students', StudentController::class);
     Route::resource('subject', SubjectController::class);
     Route::resource('enrollment', EnrollmentController::class);
     Route::resource('grades', GradeController::class);
 }); 
 
-
-
 //Student Pages Routes
 Route::get('/student/dashboard', [studentdashboard::class, 'indexStudent'])
     ->middleware(['auth' ,'verified'])
     ->name('dashboard');
     
-    Route::get('/profiles', function () {
+    Route::get('/student/profiles', function () {
         return view('studentPages.profiles');
     })->middleware(['auth', 'verified'])->name('profiles');    
-
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
