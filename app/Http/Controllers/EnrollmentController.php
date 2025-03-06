@@ -6,6 +6,10 @@ use App\Models\Subject;
 use App\Models\Enrollment;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\UpdateEnrollmentRequest;
+
+use App\Http\Requests\StoreEnrollmentRequest;
+
 class EnrollmentController extends Controller
 {
     /**
@@ -33,26 +37,12 @@ class EnrollmentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
-        $request->validate([
-            'student_id' => 'required|exists:students,id',
-            'subject_id' => 'required|exists:subjects,id',
-            'enrollment_date' => 'required|date',
-        ]);
-    
-        $exists = Enrollment::where('student_id', $request->student_id)
-                            ->where('subject_id', $request->subject_id)
-                            ->exists();
-    
-        if ($exists) {
-            return redirect()->back()->withErrors(['student_id' => 'This student is already enrolled in this subject.'])->withInput();
-        }
-    
-        Enrollment::create($request->all());
-    
-        return redirect()->route('Admin Enrolled Students')->with('success', 'Enrollment added successfully.');
-    }
+    public function store(StoreEnrollmentRequest $request)
+{
+    Enrollment::create($request->validated());
+
+    return redirect()->route('Admin Enrolled Students')->with('success', 'Enrollment added successfully.');
+}
 
     /**
      * Display the specified resource.
@@ -75,19 +65,14 @@ class EnrollmentController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'student_id' => 'required|exists:students,id',
-            'subject_id' => 'required|exists:subjects,id',
-            'enrollment_date' => 'required|date',
-        ]);
-    
-        Enrollment::findOrFail($id)->update($request->all());
-    
-        return redirect()->route('Admin Enrolled Students')->with('success', 'Enrollment updated successfully.');
-    }
+    public function update(UpdateEnrollmentRequest $request, $id)
+{
+    // The validation is now handled by the UpdateEnrollmentRequest
 
+    Enrollment::findOrFail($id)->update($request->all());
+
+    return redirect()->route('Admin Enrolled Students')->with('success', 'Enrollment updated successfully.');
+}
     /**
      * Remove the specified resource from storage.
      */

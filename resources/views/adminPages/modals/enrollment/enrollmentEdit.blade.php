@@ -64,6 +64,11 @@
                 <input type="hidden" name="id" id="edit_id">
 
                 <div class="row g-3">
+                    @error('student_id')
+                        <div class="text-danger fw-bold">
+                            <i class="bi bi-exclamation-circle-fill"></i> {{ $message }}
+                        </div>
+                    @enderror
                     <div class="col-md-6">
                         <label for="student_id" class="form-label">Search Student</label>
                         <select class="form-select select2" id="student_id" name="student_id" required>
