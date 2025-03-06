@@ -41,6 +41,14 @@ class EnrollmentController extends Controller
             'enrollment_date' => 'required|date',
         ]);
     
+        $exists = Enrollment::where('student_id', $request->student_id)
+                            ->where('subject_id', $request->subject_id)
+                            ->exists();
+    
+        if ($exists) {
+            return redirect()->back()->withErrors(['student_id' => 'This student is already enrolled in this subject.'])->withInput();
+        }
+    
         Enrollment::create($request->all());
     
         return redirect()->route('Admin Enrolled Students')->with('success', 'Enrollment added successfully.');

@@ -102,10 +102,19 @@
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" name="name" id="name" value="" required>
                     </div>
+
+                
                     <div class="mb-4">
+                        @error('code')
+                            <div class="text-danger fw-bold">
+                                <i class="bi bi-exclamation-circle-fill"></i> {{ $message }}
+                            </div>
+                        @enderror
                         <label for="code" class="form-label">Code</label>
                         <input type="text" class="form-control" name="code" id="code" value="" required>
                     </div>
+                
+
                     <div class="mb-4">
                         <label for="units" class="form-label">Units</label>
                         <input type="number" class="form-control" name="units" id="units" value="" required>
@@ -121,9 +130,11 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"></script>
 <script>
     function redirectToTable() {
-        window.location.href = "{{ route('Admin Subjects') }}"; // Change to your actual table route
+        window.location.href = "{{ route('Admin Subjects') }}"; 
     }
 </script>
 </body>

@@ -35,7 +35,7 @@ class SubjectController extends Controller
     {
         $data = $request->validate([
             'name' => 'required',
-            'code' => 'required',
+            'code' => 'required|max:10|unique:subjects,code',
             'units' => 'required',
         ]);
     

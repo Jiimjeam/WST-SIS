@@ -47,10 +47,10 @@
                             <p><strong>Name:</strong> {{ $subject->name }}</p>
                         </div>
                         <div class="mb-3">
-                            <p><strong>Email:</strong> {{ $subject->code }}</p>
+                            <p><strong>Subject Code:</strong> {{ $subject->code }}</p>
                         </div>
                         <div class="mb-3">
-                            <p><strong>Address:</strong> {{ $subject->units }}</p>
+                            <p><strong># of Units:</strong> {{ $subject->units }}</p>
                         </div>
                         <div class="mb-3">
                             <p><strong>Created At:</strong> {{ $subject->created_at }}</p>
