@@ -60,7 +60,9 @@
                         <label for="enrollment_date" class="form-label fw-semibold">Enrollment Date</label>
                         <input type="date" class="form-control" name="enrollment_date" required>
                     </div>
+
                     <div class="col-12 text-end">
+                        <a href="{{ route('Admin Enrolled Students') }}" class="btn btn-secondary px-4">Back</a>
                         <button type="submit" class="btn btn-success px-4">Enroll</button>
                     </div>
                 </div>

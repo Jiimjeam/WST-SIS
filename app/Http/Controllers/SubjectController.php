@@ -102,12 +102,22 @@ class SubjectController extends Controller
      */
     public function destroy(Subject $subject)
     {
-        $subject->delete(); 
-        $subjectList = Subject::all();
-        return view ("adminPages.adminSubjects", [
-            "ConfirmMessage" => "Subject Deleted Successfully", 
-            "alertType" => "success", 
-            "subjectList" => $subjectList
+        // Check if the subject has enrolled students
+        if ($subject->enrollments()->exists()) {
+            return response()->json([
+                "ConfirmMessage" => "Cannot delete this subject because students are enrolled.",
+                "alertType" => "error"
+            ], 400); // 400 Bad Request
+        }
+    
+        // Delete the subject if no students are enrolled
+        $subject->delete();
+    
+        return response()->json([
+            "ConfirmMessage" => "Subject deleted successfully.",
+            "alertType" => "success"
         ]);
     }
+    
+
 }

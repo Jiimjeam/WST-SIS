@@ -64,13 +64,13 @@ class GradeController extends Controller
     public function update(Request $request, $enrollmentId)
     {
         $request->validate([
-            'grades' => 'nullable|numeric|min:0|max:100',
+            'grade' => 'numeric',
         ]);
 
         $enrollment = Enrollment::findOrFail($enrollmentId);
         Grade::updateOrCreate(
             ['enrollment_id' => $enrollmentId],
-            ['grades' => $request->input('grades')]
+            ['grades' => $request->input('grade')]
         );
 
         return redirect()->route('Admin Add Grades')->with('success', 'Grade updated successfully.');

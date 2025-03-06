@@ -22,14 +22,7 @@
                 </p>
               </div>
             </div>
-            <div class="d-flex align-items-center">
-              <a href="javascript:;" class="btn btn-outline-white mb-0 me-1 btn-sm">
-                Billing
-              </a>
-              <a href="javascript:;" class="btn btn-outline-white mb-0 btn-sm">
-                Payments
-              </a>
-            </div>
+            
           </div>
         </div>
       </div>

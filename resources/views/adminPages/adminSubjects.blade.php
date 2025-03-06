@@ -170,27 +170,29 @@
   <script>
   function deleteSubject(id) {
     $('#confirmDeleteBtn').off('click').on('click', function () {
-      var form = document.getElementById("subject-form-" + id);
-      
-      $.ajax({
-        url: form.action,
-        type: 'POST',
-        data: new FormData(form),
-        processData: false,
-        contentType: false,
-        success: function(response) {
-          $('.bd-example-modal-sm').modal('hide');
-          location.reload(); // Refresh the page to update the table
-        },
-        error: function(xhr) {
-          alert("Error deleting student. Please try again.");
-        }
-      });
+        var form = document.getElementById("subject-form-" + id);
+
+        $.ajax({
+            url: form.action,
+            type: 'POST', // Keep POST but include the _method field for DELETE
+            data: new FormData(form),
+            processData: false,
+            contentType: false,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') // Ensure CSRF token is included
+            },
+            success: function(response) {
+                $('.bd-example-modal-sm').modal('hide');
+                location.reload(); // Refresh the page to update the table
+            },
+            error: function(xhr) {
+                alert(xhr.responseJSON?.ConfirmMessage || "Error deleting subject. Please try again.");
+            }
+        });
     });
 
     $('.bd-example-modal-sm').modal('show');
-  }
-
+}
   
 </script>
 
