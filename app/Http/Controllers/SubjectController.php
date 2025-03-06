@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\UpdateSubjectRequest;
+
 class SubjectController extends Controller
 {
     /**
@@ -76,41 +78,33 @@ class SubjectController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        $subject = Subject::find($id);
-        
-        if (!$subject) {
-            return redirect()->back()->with('error', 'Student not found!');
-        }
-    
-        
-        $data = $request->validate([
-            'name' => 'required',
-            'code' => 'required|unique:subjects,code,' . $id,
-            'units' => 'required',
-        ]);
-    
-        
-        $subject->update($data);
-    
-        return redirect()->route('Admin Subjects')->with('success', 'Subject updated successfully!');
+    public function update(UpdateSubjectRequest $request, string $id)
+{
+    $subject = Subject::find($id);
+
+    if (!$subject) {
+        return redirect()->back()->with('error', 'Subject not found!');
     }
+
+    $subject->update($request->validated());
+
+    return redirect()->route('Admin Subjects')->with('success', 'Subject updated successfully!');
+}
 
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(Subject $subject)
     {
-        // Check if the subject has enrolled students
+        // Check enrolled students
         if ($subject->enrollments()->exists()) {
             return response()->json([
                 "ConfirmMessage" => "Cannot delete this subject because students are enrolled.",
                 "alertType" => "error"
-            ], 400); // 400 Bad Request
+            ], 400); 
         }
     
-        // Delete the subject if no students are enrolled
+        // Delete sub if no student
         $subject->delete();
     
         return response()->json([
