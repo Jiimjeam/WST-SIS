@@ -4,7 +4,6 @@
 
 @section('dashboard')
 
-{{-- Include Bootstrap --}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 
 <div class="container mt-4">
@@ -47,7 +46,7 @@
                                     <td class="text-center">{{ \Carbon\Carbon::parse($enrollment->enrollment_date)->format('M d, Y') }}</td>
                                     <td class="text-center">
                                         @php
-                                            $grade = optional($enrollment->grades->first())->grade;
+                                            $grade = optional($enrollment->grades->first())->grades;
                                         @endphp
                                         <span class="badge 
                                             @if ($grade === null) bg-secondary
