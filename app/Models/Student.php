@@ -20,5 +20,9 @@ class Student extends Authenticatable
         'role'
     ];
 
+    protected $hidden = [
+        'password', 'remember_token',
+    ];
+
 }
 

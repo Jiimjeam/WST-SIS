@@ -29,6 +29,7 @@ Route::middleware(['auth', 'verified', 'can:is-admin'])->prefix('admin')->group(
     Route::resource('subject', SubjectController::class);
     Route::resource('enrollment', EnrollmentController::class);
     Route::resource('grades', GradeController::class);
+    
 }); 
 
 //Student Pages Routes
@@ -37,8 +38,8 @@ Route::get('/student/dashboard', [studentdashboard::class, 'indexStudent'])
     ->name('dashboard');
     
     Route::get('/student/profiles', function () {
-        return view('studentPages.profiles');
-    })->middleware(['auth', 'verified'])->name('profiles');    
+        return view('studentPages.profiles');})
+        ->middleware(['auth', 'verified'])->name('profiles');    
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

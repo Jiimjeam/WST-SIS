@@ -106,7 +106,6 @@ class SubjectController extends Controller
     
         // Delete sub if no student
         $subject->delete();
-    
         return response()->json([
             "ConfirmMessage" => "Subject deleted successfully.",
             "alertType" => "success"

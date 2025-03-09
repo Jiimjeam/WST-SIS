@@ -168,6 +168,7 @@
   </div>
 
   <script>
+    
   function deleteSubject(id) {
     $('#confirmDeleteBtn').off('click').on('click', function () {
         var form = document.getElementById("subject-form-" + id);
