@@ -1,45 +1,29 @@
 @extends('layouts.Adminlayout')
 
-@section('title', 'Admindashboard')
+@section('title', 'Admin Dashboard')
 
 @section('Admindashboard')
-  <!-- Link stylesheets and scripts for DataTable and icons -->
-  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
-  <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-  <script>
-    $(document).ready(function () {
-      $('#myDataTable').DataTable({
-        "paging": true,
-        "lengthChange": true,
-        "pageLength": 25,
-        "searching": true,
-        "ordering": true,
-        "info": false,
-        "autoWidth": false,
-        "responsive": true, // Make it responsive
-        "language": {
-          "paginate": {
-            "previous": "<i class='bi bi-chevron-left'></i>",
-            "next": "<i class='bi bi-chevron-right'></i>"
-          }
-        }
-      });
-      $.extend(true, $.fn.dataTable.defaults, {
-        dom: "<'row'<'col-sm-12 col-md-6'B><'col-sm-12 col-md-6'f>>" +
-             "<'row'<'col-sm-12'tr>>" +
-             "<'row'<'col-sm-12 col-md-5'i><'col-sm-12 col-md-7'p>>",
-        buttons: ["copy", "csv", "excel", "pdf", "print"]
-      });
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('#myDataTable').DataTable({
+      "paging": true,
+      "lengthChange": true,
+      "pageLength": 25,
+      "searching": true,
+      "ordering": true,
+      "info": false,
+      "autoWidth": false,
+      "responsive": true,
     });
-  </script>
+  });
+</script>
 
 <div class="container mt-4">
     <div class="card shadow-sm border-0">
@@ -51,7 +35,7 @@
                         <select name="subject_id" id="subject_id" class="form-select" onchange="this.form.submit()">
                             <option value="">All Subjects</option>
                             @foreach ($subjects as $subject)
-                                <option value="{{ $subject->id }}" {{ $selectedSubject = $subject->id ? 'selected' : '' }}>
+                                <option value="{{ $subject->id }}" {{ $selectedSubject == $subject->id ? 'selected' : '' }}>
                                     {{ $subject->name }}
                                 </option>
                             @endforeach
@@ -61,7 +45,7 @@
             </form>
 
             <div class="table-responsive">
-                <table id="myDataTable" class="table table-striped table-hover align-middle" >
+                <table id="myDataTable" class="table table-striped table-hover align-middle">
                     <thead class="table-dark">
                         <tr>
                             <th>Student</th>
@@ -76,8 +60,8 @@
                                 <td>{{ $enrollment->student->name }}</td>
                                 <td>{{ $enrollment->subject->name }}</td>
                                 <td>
-                                    <span class="badge {{ $enrollment->grades->isNotEmpty() ? ($enrollment->grades->first()->grade >= 3.0 ? 'bg-success' : 'bg-danger') : 'bg-secondary' }}">
-                                        {{ $enrollment->grades->isNotEmpty() ? $enrollment->grades->first()->grade : 'N/A' }}
+                                    <span class="badge {{ $enrollment->grades->isNotEmpty() ? ($enrollment->grades->first()->grades >= 3.0 ? 'bg-success' : 'bg-danger') : 'bg-secondary' }}">
+                                        {{ $enrollment->grades->isNotEmpty() ? $enrollment->grades->first()->grades : 'N/A' }}
                                     </span>
                                 </td>
                                 <td class="text-center">
@@ -98,35 +82,27 @@
                             </tr>
 
                             <!-- Edit Grade Modal -->
-                            <div class="modal fade" id="editGradeModal{{ $enrollment->id }}" tabindex="-1" aria-labelledby="editGradeModalLabel{{ $enrollment->id }}" aria-hidden="true">
+                            <div class="modal fade" id="editGradeModal{{ $enrollment->id }}" tabindex="-1">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header bg-warning text-dark">
-                                            <h5 class="modal-title fw-bold" id="editGradeModalLabel{{ $enrollment->id }}">
-                                                Edit Grade for {{ $enrollment->student->name }}
-                                            </h5>
-                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <h5 class="modal-title">Edit Grade for {{ $enrollment->student->name }}</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                                         </div>
                                         <form action="{{ route('grades.update', $enrollment->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
                                             <div class="modal-body">
-                                                <div class="mb-3">
-                                                    <label for="grade" class="form-label">Grade</label>
-                                                    <select name="grade" id="grade" class="form-select">
-                                                        @php
-                                                            $gradeOptions = [1.0, 1.25, 1.50, 1.75, 2.0, 2.25, 2.50, 2.75, 3.0, 3.25, 3.50, 3.75, 4.0, 4.25, 4.50, 4.75, 5.0];
-                                                        @endphp
-                                                        @foreach ($gradeOptions as $grade)
-                                                            <option value="{{ $grade }}" {{ $enrollment->grades->isNotEmpty() && $enrollment->grades->first()->grade == $grade ? 'selected' : '' }}>
-                                                                {{ $grade }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
-                                                </div>
+                                                <label for="grades" class="form-label">Grade</label>
+                                                <select name="grades" id="grades" class="form-select">
+                                                    @foreach ([1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0] as $grade)
+                                                        <option value="{{ $grade }}" {{ $enrollment->grades->isNotEmpty() && $enrollment->grades->first()->grades == $grade ? 'selected' : '' }}>
+                                                            {{ $grade }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
                                             </div>
                                             <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                                 <button type="submit" class="btn btn-success">Save Changes</button>
                                             </div>
                                         </form>
@@ -140,9 +116,5 @@
         </div>
     </div>
 </div>
-@endsection
 
- 
- 
- 
- 
+@endsection
