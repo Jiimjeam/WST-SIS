@@ -14,7 +14,10 @@ class StoreGradeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'grades' => 'numeric|min:0|max:100',
+            'grades' => [
+                'required',
+                'in:1.0,1.25,1.5,1.75,2.0,2.25,2.5,2.75,3.0,3.25,3.5,3.75,4.0,4.25,4.5,4.75,5.0'
+            ],
             'enrollment_id' => 'required|exists:enrollments,id',
         ];
     }

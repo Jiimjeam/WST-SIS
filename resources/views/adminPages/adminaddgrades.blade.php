@@ -92,10 +92,16 @@
                                         <form action="{{ route('grades.update', $enrollment->id) }}" method="POST">
                                             @csrf
                                             @method('PUT')
+
                                             <div class="modal-body">
                                                 <label for="grades" class="form-label">Grade</label>
+                                                @error('grade')
+                                                    <div class="text-danger fw-bold">
+                                                        <i class="bi bi-exclamation-circle-fill"></i> {{ $message }}
+                                                    </div>
+                                                @enderror
                                                 <select name="grades" id="grades" class="form-select">
-                                                    @foreach ([1.0, 1.5, 2.0, 2.5, 3.0, 4.0, 5.0] as $grade)
+                                                    @foreach ([1.0, 1.25, 1.5, 1.75, 2.0, 2.25, 2.5, 2.75, 3.0, 3.25, 3.5, 3.75, 4.0, 4.25, 4.5, 4.75, 5.0] as $grade)
                                                         <option value="{{ $grade }}" {{ $enrollment->grades->isNotEmpty() && $enrollment->grades->first()->grades == $grade ? 'selected' : '' }}>
                                                             {{ $grade }}
                                                         </option>

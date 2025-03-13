@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreGradeRequest;
+use App\Http\Requests\UpdateGradeRequest;
+
 use App\Models\Enrollment;
 use App\Models\Grade;
 use App\Models\Subject;
@@ -24,12 +27,9 @@ class GradeController extends Controller
         return view('adminPages.adminaddgrades', compact('enrollments', 'subjects', 'selectedSubject'));
     }
 
-    public function store(Request $request)
+    public function store(StoreGradeRequest $request)
     {
-        $request->validate([
-            'enrollment_id' => 'required|exists:enrollments,id',
-            'grades' => 'required|numeric|min:1|max:5',
-        ]);
+
 
         Grade::create([
             'enrollment_id' => $request->enrollment_id,
@@ -39,11 +39,9 @@ class GradeController extends Controller
         return redirect()->route('grades.index')->with('success', 'Grade added successfully.');
     }
 
-    public function update(Request $request, $enrollmentId)
+    public function update(UpdateGradeRequest $request, $enrollmentId)
     {
-        $request->validate([
-            'grades' => 'required|numeric|min:1|max:5',
-        ]);
+       
 
         Grade::updateOrCreate(
             ['enrollment_id' => $enrollmentId],
