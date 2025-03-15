@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('password')->nullable();
+            $table->string('password');
             $table->string('address')->default('123 Main St, Springfield');
             $table->enum('role', ['admin', 'student'])->default('student');
             $table->integer('age')->default(21); 

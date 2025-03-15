@@ -30,7 +30,8 @@ class StudentFactory extends Factory
             'email' => $this->faker->unique()->safeEmail,
             'address' => $this->faker->address,
             'age' => $this->faker->numberBetween(18, 25),
-            'password' => Hash::make('password123'),
+            'password' => Hash::make('123123123'),
+            'email_verified_at' => now(),
             'role' => 'student',  
         ];
     }
