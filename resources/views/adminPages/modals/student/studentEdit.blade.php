@@ -89,13 +89,11 @@
             @csrf
             @method('PATCH')
 
-            <!-- Name -->
             <div class="form-group">
                 <label for="name" class="form-label">Name</label>
                 <input type="text" class="form-control" name="name" id="name" value="{{ $student->name }}" required>
             </div>
-
-            <!-- Email -->
+ 
             <div class="form-group">
                 @error('email')
                     <div class="text-danger fw-bold">
@@ -106,19 +104,16 @@
                 <input type="email" class="form-control" name="email" id="email" value="{{ $student->email }}" required>
             </div>
 
-            <!-- Address -->
             <div class="form-group">
                 <label for="address" class="form-label">Address</label>
                 <input type="text" class="form-control" name="address" id="address" value="{{ $student->address }}" required>
             </div>
 
-            <!-- Age -->
             <div class="form-group">
                 <label for="age" class="form-label">Age</label>
                 <input type="number" class="form-control" name="age" id="age" value="{{ $student->age }}" required>
             </div>
 
-            <!-- Action Buttons -->
             <div class="form-group text-end">
                 <a href="{{ route('Admin Student Tables') }}" class="btn btn-secondary">Back to Students</a>
                 <button type="submit" class="btn btn-primary">Save</button>

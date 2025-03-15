@@ -66,13 +66,10 @@ class EnrollmentController extends Controller
      * Update the specified resource in storage.
      */
     public function update(UpdateEnrollmentRequest $request, $id)
-{
-    // The validation is now handled by the UpdateEnrollmentRequest
-
-    Enrollment::findOrFail($id)->update($request->all());
-
-    return redirect()->route('Admin Enrolled Students')->with('success', 'Enrollment updated successfully.');
-}
+    {
+        Enrollment::findOrFail($id)->update($request->all());
+        return redirect()->route('Admin Enrolled Students')->with('success', 'Enrollment updated successfully.');
+    }
     /**
      * Remove the specified resource from storage.
      */
