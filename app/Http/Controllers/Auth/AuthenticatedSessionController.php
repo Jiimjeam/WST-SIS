@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
+
 class AuthenticatedSessionController extends Controller
 {
     /**
@@ -27,14 +28,19 @@ class AuthenticatedSessionController extends Controller
         $request->authenticate();
         $request->session()->regenerate();
     
-        // Redirect based on user role
-        if (Auth::user()->isAdmin()) {
+        $guard = session('auth_guard', 'web');
+        Auth::shouldUse($guard); // Set the correct guard for the session
+        $user = Auth::user();    // Retrieve the correct authenticated user
+
+        if ($guard === 'web' && $user->role === 'admin') {
             return redirect()->route('Admin Dashboard');
+        } elseif ($guard === 'student') {
+            return redirect()->route('dashboard');
         } else {
             return redirect()->route('dashboard');
         }
     }
-
+    
     /**
      * Destroy an authenticated session.
      */
@@ -52,7 +58,9 @@ class AuthenticatedSessionController extends Controller
     {
         if ($user->isAdmin()) {
             return redirect()->route('Admin Dashboard');
+        } elseif ($user instanceof \App\Models\Student) {
+            return redirect()->route('dashboard'); // New student route
         }
         return redirect()->route('dashboard');
-    }
+    }   
 }

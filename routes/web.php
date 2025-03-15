@@ -32,14 +32,13 @@ Route::middleware(['auth', 'verified', 'can:is-admin'])->prefix('admin')->group(
     
 }); 
 
-//Student Pages Routes
 Route::get('/student/dashboard', [studentdashboard::class, 'indexStudent'])
-    ->middleware(['auth' ,'verified'])
+    ->middleware(['auth:student', 'auth' ,'verified'])
     ->name('dashboard');
     
     Route::get('/student/profiles', function () {
         return view('studentPages.profiles');})
-        ->middleware(['auth', 'verified'])->name('profiles');    
+        ->middleware(['auth:student', 'auth' ,'verified'])->name('profiles');    
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

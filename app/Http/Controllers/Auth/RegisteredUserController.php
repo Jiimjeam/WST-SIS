@@ -31,7 +31,6 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
             'email' => [
@@ -43,36 +42,35 @@ class RegisteredUserController extends Controller
                 }
             ],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'role' => ['required', 'string', 'in:admin,student'], 
+            'role' => ['required', 'string', 'in:admin,student'],
         ]);
-    
-        
+
         if ($request->role === 'student') {
-            Student::create([
+            $student = Student::create([
                 'name' => $request->name,
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
                 'role' => $request->role,
             ]);
+
+            // Login the student with the 'student' guard
+            Auth::guard('student')->login($student);
+
+            return redirect()->route('dashboard');  // Redirect to the student's dashboard (ensure this route exists)
+        } else {
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => Hash::make($request->password),
+                'role' => $request->role,
+            ]);
+
+            event(new Registered($user));
+
+            // Login the admin using the default guard
+            Auth::login($user);
+
+            return redirect()->route('Admin Dashboard');  // Redirect to the admin's dashboard
         }
-
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-            'role' => $request->role, 
-        ]); 
-        
-
-        event(new Registered($user));
-        Auth::login($user);
-
-        if ($user->role === 'admin') {
-            return redirect()->route('Admin Dashboard'); 
-        } elseif ($user->role === 'student') {
-            return redirect()->route('dashboard'); 
-        }
-
-        return redirect(route('home', absolute: false));
     }
 }
